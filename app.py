@@ -1,6 +1,5 @@
 from datetime import date
 from datetime import datetime
-from typing import TextIO
 import pytz
 
 from models.task import Task, Tasks
@@ -38,8 +37,10 @@ def process_task(task: Task):
         answer = input()
         if answer.lower() in ['y', 'yes']:
             task.completed = True
+            task.update_log()
             return task
         elif answer.lower() in ['n', 'no']:
+            task.update_log()
             task.completed = False
             return task
         else:

@@ -1,6 +1,3 @@
-from typing import Optional
-
-
 class Task:
     id: int = 0
     completed: bool = False
@@ -34,7 +31,7 @@ class Task:
 
 
 class Tasks(Task):
-    tasks: dict = {}
+    _tasks: dict = {}
 
     def __init__(self, _id: int, _mission: str, _tasks):
         super().__init__(_id=_id, _mission=_mission)
@@ -53,7 +50,7 @@ class Tasks(Task):
         return self.log_tasks().__str__()
 
     def __len__(self):
-        return len(self.tasks)
+        return len(self._tasks)
 
     def __add__(self, other):
         if other is Task:
@@ -65,27 +62,37 @@ class Tasks(Task):
 
     def log_tasks(self):
         self.update_log()
-        self.log.setdefault("tasks", self.tasks)
+        self.log.setdefault("tasks", self._tasks)
+        self.check_tasks()
 
         return self.log
 
+    def check_tasks(self):
+        completed_tasks: int = 0
+        for k, v in self._tasks.items():
+            if v.completed:
+                completed_tasks += 1
+
+        if completed_tasks == len(self._tasks):
+            self.completed = True
+
     def add_task(self, task: Task):
-        self.tasks.setdefault(task.id, task)
+        self._tasks.setdefault(task.id, task)
 
     def remove_task(self, task: Task):
-        self.tasks.pop(task.id)
+        self._tasks.pop(task.id)
 
     def remove_task_by_id(self, task_id: int):
-        self.tasks.pop(task_id)
+        self._tasks.pop(task_id)
 
     def get_task(self, task_id: int):
-        return self.tasks.get(task_id)
+        return self._tasks.get(task_id)
 
     def get_tasks(self):
-        return self.tasks.items()
+        return self._tasks.items()
 
     def update_task(self, task: Task):
-        self.tasks.setdefault(task.id, task)
+        self._tasks.setdefault(task.id, task)
 
 
 # task_one = Task(0, "Do something")
