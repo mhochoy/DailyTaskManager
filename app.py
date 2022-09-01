@@ -15,7 +15,7 @@ def main():
     time = helpers.get_time()
     file_name = "My Daily Tasks"
     file_path = f"{settings.path}{file_name} {day}.txt"
-    file = open(file_name, "w")
+    file = open(file_path, "w")
     while not done:
         with file:
             date_string = f"{day}\n{time}\n\n\n"
