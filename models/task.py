@@ -94,6 +94,24 @@ class Tasks(Task):
     def update_task(self, task: Task):
         self._tasks.setdefault(task.id, task)
 
+    def update_log(self):
+        for _id, _task in self._tasks.items():
+            log: dict = {
+                "id": _task.id,
+                "mission": _task.mission,
+                "completed": _task.completed
+            }
+            _task.log = log
+
+        log: dict = {
+            "id": self.id,
+            "mission": self.mission,
+            "completed": self.completed
+        }
+        self.log = log
+
+    def count(self) -> int:
+        return len(self._tasks)
 
 # task_one = Task(0, "Do something")
 # task_two = Task(1, "Do another thing")
