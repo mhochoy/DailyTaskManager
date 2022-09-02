@@ -43,6 +43,7 @@ def handle_menu(decision: str, f: TextIO):
         task: Task = Task(settings.saved_tasks.count() + 1, mission)
         settings.saved_tasks.add_task(task=task)
         settings.saved_tasks.update_log()
+        settings.saved_tasks.log_tasks()
         return False
 
     if decision == "log":

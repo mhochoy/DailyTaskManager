@@ -68,13 +68,15 @@ class Tasks(Task):
         return self.log
 
     def check_tasks(self):
-        completed_tasks: int = 0
-        for k, v in self._tasks.items():
-            if v.completed:
-                completed_tasks += 1
+        true_list = []
+        for _task in self._tasks.values():
+            true_list.append(_task.completed)
 
-        if completed_tasks == len(self._tasks):
+        all_tasks_completed: bool = all(true_list)
+        if all_tasks_completed:
             self.completed = True
+        else:
+            self.completed = False
 
     def add_task(self, task: Task):
         self._tasks.setdefault(task.id, task)
