@@ -114,12 +114,3 @@ class Tasks(Task):
 
     def count(self) -> int:
         return len(self._tasks)
-
-# task_one = Task(0, "Do something")
-# task_two = Task(1, "Do another thing")
-#
-# tasks = [task_one, task_two]
-#
-# my_tasks = Tasks(0, "Complete these tasks before 3 o'clock", tasks)
-#
-# print(my_tasks)
